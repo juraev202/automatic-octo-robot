@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Plan</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+{% load widget_tweaks %}
+
+<div class="container mt-5">
+    <div class="card p-4 shadow-sm">
+        <h2 class="mb-4">Create a New Plan</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                {{ form.title.label_tag }}
+                {{ form.title|add_class:"form-control" }}
+                {% if form.title.errors %}
+                    <div class="text-danger">{{ form.title.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.description.label_tag }}
+                {{ form.description|add_class:"form-control" }}
+                {% if form.description.errors %}
+                    <div class="text-danger">{{ form.description.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.photo.label_tag }}
+                {{ form.photo|add_class:"form-control" }}
+                {% if form.photo.errors %}
+                    <div class="text-danger">{{ form.photo.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                <label for="{{ form.category.id_for_label }}" class="form-label">Choose an existing category</label>
+                {{ form.category|add_class:"form-select" }}
+                {% if form.category.errors %}
+                    <div class="text-danger">{{ form.category.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                <label for="{{ form.new_category.id_for_label }}" class="form-label">Or add a new category</label>
+                {{ form.new_category|add_class:"form-control" }}
+                {% if form.new_category.help_text %}
+                    <div class="form-text">{{ form.new_category.help_text }}</div>
+                {% endif %}
+                {% if form.new_category.errors %}
+                    <div class="text-danger">{{ form.new_category.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.reminder_time.label_tag }}
+                {{ form.reminder_time|add_class:"form-control" }}
+                {% if form.reminder_time.errors %}
+                    <div class="text-danger">{{ form.reminder_time.errors }}</div>
+                {% endif %}
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Save Plan</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
